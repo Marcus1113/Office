@@ -85,7 +85,7 @@ function append_office_list(element){
     $.each(office_list, function(index, value) {
         var newOption = $('<option>', {
             value: value.price,
-            text: value.name
+            text: value.name  + " | RM" +value.price
         });
         office_option_element.append(newOption);
     });
