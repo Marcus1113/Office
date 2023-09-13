@@ -79,23 +79,17 @@ $('.office-list').change(function (){
     let element = $(this);
     let id = element.attr("id");
     let property = id.replace("-office", "");
-
     let price = element.val();
-    let advance_rental = price;
-    let deposit = advance_rental * 2;
-    let total_amount = Number(advance_rental) + Number(deposit) + Number(tenancy_agreement_fee);
+    let prices = calculate_amount(price);
+    display_amount(property, prices['price'], prices['advance_rental'], prices['deposit'], prices['total_amount']);
+});
 
-    price = Number(price).toLocaleString();
-    advance_rental = Number(advance_rental).toLocaleString();
-    deposit = Number(deposit).toLocaleString();
-    total_amount = total_amount.toLocaleString();
-
+$('.recalculate').click(function (){
+    let property = $(this).data("property");
     let propertyGroup = $('#' + property);
-    propertyGroup.find('.office-price-display').text(price);
-    propertyGroup.find('.advance-rental-display').text(currency + advance_rental);
-    propertyGroup.find('.total-deposit-amount-display').text(currency + deposit);
-    propertyGroup.find('.tenancy-agreement-amount-display').text(currency + tenancy_agreement_fee);
-    propertyGroup.find('.total-amount-display').text(currency + total_amount);
+    let price =     propertyGroup.find('.nego-price').val();
+    let prices = calculate_amount(price);
+    display_amount(property, prices['price'], prices['advance_rental'], prices['deposit'], prices['total_amount']);
 });
 
 function append_office_list(element){
@@ -126,4 +120,28 @@ function append_office_list(element){
         });
         office_option_element.append(newOption);
     });
+}
+
+function calculate_amount(price){
+    let advance_rental = price;
+    let deposit = advance_rental * 2;
+    let total_amount = Number(advance_rental) + Number(deposit) + Number(tenancy_agreement_fee);
+
+    return {
+        'price' : price,
+        'advance_rental' : advance_rental,
+        'deposit' : deposit,
+        'total_amount' : total_amount,
+    }
+}
+
+function display_amount(property, office_price, advance_rental, deposit, total_amount){
+
+    let propertyGroup = $('#' + property);
+
+    propertyGroup.find('.office-price-display').text(office_price);
+    propertyGroup.find('.advance-rental-display').text(currency + advance_rental);
+    propertyGroup.find('.total-deposit-amount-display').text(currency + deposit);
+    propertyGroup.find('.tenancy-agreement-amount-display').text(currency + tenancy_agreement_fee);
+    propertyGroup.find('.total-amount-display').text(currency + total_amount);
 }
