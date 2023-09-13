@@ -1,11 +1,12 @@
 const tenancy_agreement_fee = 350;
+const currency = "RM";
 let property_list = {
     "su": {
         "G": [
-            { "name": "Shop lot", "price": 20 },
+            { "name": "Shop lot", "price": 2500 },
         ],
         "1": [
-            { "name": "A1", "price": 480 },
+            { "name": "A1", "price": 10000 },
             { "name": "A2", "price": 480 },
             { "name": "A3", "price": 480 },
             { "name": "A4", "price": 480 },
@@ -100,16 +101,17 @@ $('.office-list').change(function (){
     let deposit = advance_rental * 2;
     let total_amount = advance_rental + deposit;
 
+    price = Number(price).toLocaleString();
+    advance_rental = Number(advance_rental).toLocaleString();
+    deposit = Number(deposit).toLocaleString();
+    total_amount = Number(total_amount).toLocaleString();
+
     let propertyGroup = $('#' + property);
     propertyGroup.find('.office-price-display').text(price);
-    propertyGroup.find('.advance-rental-display').text(advance_rental);
-    propertyGroup.find('.total-deposit-amount-display').text(deposit);
-    propertyGroup.find('.total-amount-display').text(total_amount);
-
-    // element.closest('#'+property+' .office-price-display').text(price);
-    // element.closest('#'+property+' .advance-rental-display').text(advance_rental);
-    // element.closest('#'+property+' .total-deposit-amount-display').text(deposit);
-    // element.closest('#'+property+' .total-amount-display').text(total_amount);
+    propertyGroup.find('.advance-rental-display').text(currency + advance_rental);
+    propertyGroup.find('.total-deposit-amount-display').text(currency + deposit);
+    propertyGroup.find('.tenancy-agreement-amount-display').text(currency + tenancy_agreement_fee);
+    propertyGroup.find('.total-amount-display').text(currency + total_amount);
 });
 
 
