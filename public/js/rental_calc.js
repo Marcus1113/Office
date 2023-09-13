@@ -128,10 +128,10 @@ function calculate_amount(price){
     let total_amount = Number(advance_rental) + Number(deposit) + Number(tenancy_agreement_fee);
 
     return {
-        'price' : price,
-        'advance_rental' : advance_rental,
-        'deposit' : deposit,
-        'total_amount' : total_amount,
+        'price' : Number(price),
+        'advance_rental' : Number(advance_rental),
+        'deposit' : Number(deposit),
+        'total_amount' : Number(total_amount),
     }
 }
 
@@ -139,9 +139,9 @@ function display_amount(property, office_price, advance_rental, deposit, total_a
 
     let propertyGroup = $('#' + property);
 
-    propertyGroup.find('.office-price-display').text(office_price);
-    propertyGroup.find('.advance-rental-display').text(currency + advance_rental);
-    propertyGroup.find('.total-deposit-amount-display').text(currency + deposit);
-    propertyGroup.find('.tenancy-agreement-amount-display').text(currency + tenancy_agreement_fee);
-    propertyGroup.find('.total-amount-display').text(currency + total_amount);
+    propertyGroup.find('.office-price-display').text(office_price.toLocaleString());
+    propertyGroup.find('.advance-rental-display').text(currency + advance_rental.toLocaleString());
+    propertyGroup.find('.total-deposit-amount-display').text(currency + deposit.toLocaleString());
+    propertyGroup.find('.tenancy-agreement-amount-display').text(currency + tenancy_agreement_fee.toLocaleString());
+    propertyGroup.find('.total-amount-display').text(currency + total_amount.toLocaleString());
 }
