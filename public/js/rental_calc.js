@@ -61,6 +61,43 @@ function append_property_floor(){
     });
 }
 
+$('.office-floor-list').change(function (){
+    let element = $(this);
+    let id = element.attr("id");
+    let property = id.replace("-floor", "");
+    let default_price = 0;
+
+    let propertyGroup = $('#' + property);
+    propertyGroup.find('.office-price-display').text(default_price);
+    propertyGroup.find('.advance-rental-display').text(currency + default_price);
+    propertyGroup.find('.total-deposit-amount-display').text(currency + default_price);
+    propertyGroup.find('.tenancy-agreement-amount-display').text(currency + default_price);
+    propertyGroup.find('.total-amount-display').text(currency + default_price);
+});
+
+$('.office-list').change(function (){
+    let element = $(this);
+    let id = element.attr("id");
+    let property = id.replace("-office", "");
+
+    let price = element.val();
+    let advance_rental = price;
+    let deposit = advance_rental * 2;
+    let total_amount = advance_rental + deposit;
+
+    price = Number(price).toLocaleString();
+    advance_rental = Number(advance_rental).toLocaleString();
+    deposit = Number(deposit).toLocaleString();
+    total_amount = Number(total_amount).toLocaleString();
+
+    let propertyGroup = $('#' + property);
+    propertyGroup.find('.office-price-display').text(price);
+    propertyGroup.find('.advance-rental-display').text(currency + advance_rental);
+    propertyGroup.find('.total-deposit-amount-display').text(currency + deposit);
+    propertyGroup.find('.tenancy-agreement-amount-display').text(currency + tenancy_agreement_fee);
+    propertyGroup.find('.total-amount-display').text(currency + total_amount);
+});
+
 function append_office_list(element){
 
     let id = $(element).attr("id");
@@ -90,28 +127,3 @@ function append_office_list(element){
         office_option_element.append(newOption);
     });
 }
-
-$('.office-list').change(function (){
-    let element = $(this);
-    let id = element.attr("id");
-    let property = id.replace("-office", "");
-
-    let price = element.val();
-    let advance_rental = price;
-    let deposit = advance_rental * 2;
-    let total_amount = advance_rental + deposit;
-
-    price = Number(price).toLocaleString();
-    advance_rental = Number(advance_rental).toLocaleString();
-    deposit = Number(deposit).toLocaleString();
-    total_amount = Number(total_amount).toLocaleString();
-
-    let propertyGroup = $('#' + property);
-    propertyGroup.find('.office-price-display').text(price);
-    propertyGroup.find('.advance-rental-display').text(currency + advance_rental);
-    propertyGroup.find('.total-deposit-amount-display').text(currency + deposit);
-    propertyGroup.find('.tenancy-agreement-amount-display').text(currency + tenancy_agreement_fee);
-    propertyGroup.find('.total-amount-display').text(currency + total_amount);
-});
-
-
