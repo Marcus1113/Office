@@ -83,12 +83,12 @@ $('.office-list').change(function (){
     let price = element.val();
     let advance_rental = price;
     let deposit = advance_rental * 2;
-    let total_amount = advance_rental + deposit;
+    let total_amount = Number(advance_rental) + Number(deposit) + Number(tenancy_agreement_fee);
 
     price = Number(price).toLocaleString();
     advance_rental = Number(advance_rental).toLocaleString();
     deposit = Number(deposit).toLocaleString();
-    total_amount = Number(total_amount).toLocaleString();
+    total_amount = total_amount.toLocaleString();
 
     let propertyGroup = $('#' + property);
     propertyGroup.find('.office-price-display').text(price);
