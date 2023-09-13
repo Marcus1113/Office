@@ -59,6 +59,8 @@ function append_property_floor(){
             $("#"+id).append(newOption);
         });
     });
+
+
 }
 
 $('.office-floor-list').change(function (){
