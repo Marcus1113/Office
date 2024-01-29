@@ -1,5 +1,8 @@
 const tenancy_agreement_fee = 350;
 const currency = "RM";
+const su_bank_acc = "5028-64-2729";
+const kj_bank_acc = "4617-68-7301";
+
 let property_list = {
     "su": {
         "G": [
@@ -44,7 +47,13 @@ let property_list = {
     }
 };
 
-append_property_floor()
+
+$( document ).ready(function() {
+    $("#su-bank-acc").text(su_bank_acc);
+    $("#kj-bank-acc").text(kj_bank_acc);
+    append_property_floor()
+});
+
 
 function append_property_floor(){
     $.each(property_list, function(index, value) {
@@ -59,8 +68,6 @@ function append_property_floor(){
             $("#"+id).append(newOption);
         });
     });
-
-
 }
 
 $('.office-floor-list').change(function (){
@@ -89,7 +96,10 @@ $('.office-list').change(function (){
 $('.recalculate').click(function (){
     let property = $(this).data("property");
     let propertyGroup = $('#' + property);
-    let price =     propertyGroup.find('.nego-price').val();
+    let price = propertyGroup.find('.nego-price').val();
+    if (!price){
+        alert("Please enter an amount")
+    }
     let prices = calculate_amount(price);
     display_amount(property, prices['price'], prices['advance_rental'], prices['deposit'], prices['total_amount']);
 });
