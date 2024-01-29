@@ -99,6 +99,7 @@ $('.recalculate').click(function (){
     let price = propertyGroup.find('.nego-price').val();
     if (!price){
         alert("Please enter an amount")
+        return
     }
     let prices = calculate_amount(price);
     display_amount(property, prices['price'], prices['advance_rental'], prices['deposit'], prices['total_amount']);
